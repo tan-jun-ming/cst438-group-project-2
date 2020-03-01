@@ -1,4 +1,4 @@
-from run import db
+from app import db
 
 class SampleObject(db.Model):
     __tablename__ = "objects"
