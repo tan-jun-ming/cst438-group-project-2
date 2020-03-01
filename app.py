@@ -43,7 +43,7 @@ def database_test_add():
         db.session.add(obj)
         db.session.commit()
 
-        return "Object added. ID: " + obj.o_id
+        return f"Object added. ID: {obj.o_id}"
     except Exception as e:
         return Response(utils.get_traceback(e), mimetype="text/plain")
 
