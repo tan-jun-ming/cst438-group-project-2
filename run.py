@@ -51,8 +51,11 @@ def database_test_add():
 
 @app.route('/database_test')
 def database_test():
-    ret = SampleObject.query.all()
-    return Response(json.dumps([r.serialize() for r in ret]), mimetype="application/json")
+    try:
+        ret = SampleObject.query.all()
+        return Response(json.dumps([r.serialize() for r in ret]), mimetype="application/json")
+    except Exception as e:
+        return(utils.get_traceback(e))
 
 migrate = Migrate(app, db)
 manager = Manager(app)
