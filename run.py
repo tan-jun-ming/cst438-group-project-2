@@ -7,13 +7,14 @@ from flask_migrate import Migrate, MigrateCommand
 
 import utils
 from config import Config
-from models import SampleObject
 
 app = Flask(__name__)
 
 app.config.from_object(Config)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+
+from models import SampleObject
 
 @app.route('/')
 def hello_world():
