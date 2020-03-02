@@ -1,6 +1,6 @@
 import json
 
-from flask import Flask, Response, request
+from flask import Flask, Response, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 import utils
@@ -15,8 +15,10 @@ db = SQLAlchemy(app)
 from models import SampleObject
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+@app.route('/home')
+@app.route('/index')
+def home_page():
+    return render_template("index.html")
 
 @app.route('/hello')
 def route_two():

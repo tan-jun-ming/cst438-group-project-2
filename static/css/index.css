@@ -1,0 +1,33 @@
+nav {
+    background-color: lightgrey;
+    height: 4em;
+}
+
+.item-holder {
+    max-width: 50%;
+    min-height: 100vh;
+    display: grid;
+    grid-auto-columns: 10em;
+    grid-auto-rows: 10em;
+    grid-template-columns: repeat(auto-fit, 10em);
+    grid-gap: 1em;
+    justify-content: center;
+}
+
+.store-item {
+    height: 10em;
+    width: 10em;
+    padding: 1em;
+    background-color: lightgray;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.store-item:hover {
+    background-color: grey;
+}
+
+#searchform input {
+    width: 25em;
+}
