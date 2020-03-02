@@ -2,4 +2,4 @@
 Online Store
 
 ## Deploy Instructions
-Before you deploy, please run `python run.py db migrate` after changing the schema.
+Before deploying, please run `python run.py db migrate` after changing the schema.
