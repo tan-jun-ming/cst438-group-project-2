@@ -4,7 +4,7 @@ nav {
 }
 
 .item-holder {
-    max-width: 50%;
+    width: 50%;
     min-height: 100vh;
     display: grid;
     grid-auto-columns: 10em;
