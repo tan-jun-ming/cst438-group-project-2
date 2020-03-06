@@ -1,0 +1,58 @@
+nav {
+    background-color: red;
+    height: 4em;
+}
+
+.item-holder {
+    width: 50%;
+    min-height: 100vh;
+    display: grid;
+    grid-auto-columns: 10em;
+    grid-auto-rows: 10em;
+    grid-template-columns: repeat(auto-fit, 10em);
+    grid-gap: 1em;
+    justify-content: center;
+}
+
+.store-item {
+    height: 10em;
+    width: 10em;
+    padding: 1em;
+    background-color: lightgray;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.store-item:hover {
+    background-color: grey;
+}
+
+#searchform input {
+    width: 25em;
+}
+
+
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  background-color: DodgerBlue;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+.flex-item {
+	width: 30%;
+	margin: 10px;
+}
+
+.flex-item > img {
+	width: 100%;
+}
