@@ -1,8 +1,5 @@
-import os
-basedir = os.path.abspath(os.path.dirname(__file__))
+import utils
 
 class Config(object):
-    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = utils.get_database_uri()
 
-class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgres://psqluser:psqluser@localhost/store"
