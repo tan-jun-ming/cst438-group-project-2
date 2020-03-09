@@ -56,3 +56,7 @@ def database_test():
         return Response(json.dumps([r.serialize() for r in ret]), mimetype="application/json")
     except Exception as e:
         return Response(utils.get_traceback(e), mimetype="text/plain")
+
+@app.route('/checkout')
+def checkout_page():
+    return render_template("checkout.html")
