@@ -14,6 +14,8 @@ db = SQLAlchemy(app)
 
 from models import SampleObject
 
+import api
+
 @app.route('/')
 @app.route('/home')
 @app.route('/index')
