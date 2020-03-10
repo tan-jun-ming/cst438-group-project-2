@@ -25,6 +25,14 @@ def home_page():
 @app.route('/hello')
 def route_two():
     return 'Hello, this is another route!'
+	
+@app.route('/AccountCreate')
+def routeAccountCreate():
+	return render_template("AccountCreate.html")
+
+@app.route('/AccountInfo')
+def routeAccountInfo():
+	return render_template("AccountInfo.html")
 
 @app.route('/database_test/add')
 def database_test_add():
