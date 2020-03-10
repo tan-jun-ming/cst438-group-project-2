@@ -20,37 +20,10 @@
         integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href={{ url_for('static',filename='css\product.css')}} rel="stylesheet">
+    <link href={{ url_for('static',filename='css/product.css')}} rel="stylesheet">
 
     <!-- Custom scripts for this template -->
-    <script src={{ url_for('static',filename='js/index.js')}}></script>
-    <style>
-    .flex-container {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	
-}
-  
-    .flex-item {
-	width: 30%;
-    margin: 10px;
-    float: right;
-}
-
-.flex-item > img {
-    height: 200px;
-    width: 50%;
-    background-color: #ccffcc;
-    padding: 5%;
-    float: left;
-}
-
- .container{
-     text-align: center;
-     display: flex;
- }
-    </style>
+    <script src={{ url_for('static',filename='js/createAccount.js')}}></script>
 </head>
 <body>
     <nav class="navbar sticky-top">
@@ -63,31 +36,14 @@
         <div class="d-flex flex-column align-items-center m-5">
             <h1>Create Account</h1>
         </div>
-  </div>
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-  <input type="text" class="form-control" placeholder="First Name">
 </div>
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-  <input type="text" class="form-control" placeholder="Last Name">
-</div>
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-  <input type="text" class="form-control" placeholder="Username">
-</div>
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-  <input type="text" class="form-control" placeholder="Password">
-</div>
-  <div class="input-group mb-3">
-  <div class="input-group-prepend">
-  </div>
-  <input type="text" class="form-control" placeholder="Repeat Password">
-</div>
+<input type="text" id="FirstNameInput" class="form-control" placeholder="First Name">
+<input type="text" id="LastNameInput" class="form-control" placeholder="Last Name">
+<input type="text" id="UsernameInput" class="form-control" placeholder="Username">
+<input type="text" id="PasswordInput" class="form-control" placeholder="Password">
+<input type="text" id="RepeatPasswordInput" class="form-control" placeholder="Repeat Password">
+<form class="m-3" id="CreateAccount">
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </body>
 </html>
