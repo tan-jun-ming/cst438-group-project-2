@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,44 +21,17 @@
         integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
-    <link href={{ url_for('static',filename='css\product.css')}} rel="stylesheet">
+    <link href={{ url_for('static',filename='css/product.css')}} rel="stylesheet">
 
     <!-- Custom scripts for this template -->
     <script src={{ url_for('static',filename='js/index.js')}}></script>
-    <style>
-    .flex-container {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: row;
-	
-}
-  
-    .flex-item {
-	width: 30%;
-    margin: 10px;
-    float: right;
-}
-
-.flex-item > img {
-    height: 200px;
-    width: 50%;
-    background-color: #ccffcc;
-    padding: 5%;
-    float: left;
-}
-
- .container{
-     text-align: center;
-     display: flex;
- }
-    </style>
 
 </head>
 
 <body>
     <nav class="navbar sticky-top">
 
-        <button type="button" class="btn btn-outline-secondary">This is a button</button>
+        <a type="button" class="btn btn-outline-secondary" href="checkout">Shopping Cart</a>
         <div class="ml-auto">
             <button type="button" class="btn btn-outline-secondary">This is another button</button>
         </div>
@@ -80,32 +54,23 @@
             </div>
         </form>
 
-        <div class="flex-container" id="prodcut">
-            <figure id="coverDestination">
-                <div class="prodcutCover flex-item"><img src="C:\Users\Rodrigo\cst438-group-project-2\static\img\superMario3.jpg" width="172" height="259" ></div>
-            </figure>
-            <div class="prodcutDisription flex-item">
-             <label>Title: </label>
-                <div id="publisher"><label>Publisher: </label></div>
-                <div id="release"><label>Release Date: </label></div>
-                <div id="price"><label>Price: </label></div>
-                <div id="System"><label>Sytem: </label></div>
-                <div id="discription"><label>Discription: </label></div>
-                
+        <div class="container" id="names">
+            
+            
+            <div  class="item" id="used">
+                    <img src="static\img\superMario3.jpg" >
+                </div>
+
+                <div class="item" id="gender">
+                    <div id="publisher"><label>Publisher: </label></div>
+                    <div id="release"><label>Release Date: </label></div>
+                    <div id="price"><label>Price: </label></div>
+                    <div id="System"><label>Sytem: </label></div>
+                    <div id="discription"><label>Discription: </label></div>
+            ch
             </div>
-
-
-
+    
         </div>
-            
-
-            
-        </div>
-
-    </div>
-
-
-
-</body>
+    </body>
 
 </html>

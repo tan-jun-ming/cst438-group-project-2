@@ -1,5 +1,5 @@
 nav {
-    background-color: red;
+    background-color: lightgrey;
     height: 4em;
 }
 
@@ -33,26 +33,25 @@ nav {
 }
 
 
+.container {
+    align-content: flex-start;
+    align-content: space-between;
+    display: flex;
+    flex-direction: row;
+    background-color: #f1f1f1;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 300px;
+  
+    border: dashed blue 1px;
 
-.flex-container {
-  display: flex;
-  flex-direction: row;
-  background-color: DodgerBlue;
+    
+    font-size: medium;
+     
 }
 
-.flex-container > div {
-  background-color: #f1f1f1;
-  width: 100px;
-  margin: 10px;
-  text-align: center;
-  line-height: 75px;
-  font-size: 30px;
-}
-.flex-item {
-	width: 30%;
-	margin: 10px;
-}
-
-.flex-item > img {
-	width: 100%;
+.item img {
+    height: 300px;
+    max-height: 100%;
+    max-width: 100%;
 }
