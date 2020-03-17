@@ -33,6 +33,10 @@ def routeAccountCreate():
 @app.route('/AccountInfo')
 def routeAccountInfo():
 	return render_template("AccountInfo.html")
+	
+@app.route('/AccountLogin')
+def routeAccountLogin():
+	return render_template("AccountLogin.html")
 
 @app.route('/database_test/add')
 def database_test_add():
