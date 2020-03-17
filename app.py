@@ -1,4 +1,5 @@
 import json
+import datetime
 
 from flask import Flask, Response, request, render_template
 from flask_sqlalchemy import SQLAlchemy
@@ -12,7 +13,7 @@ app.config.from_object(Config)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import SampleObject
+from models import User, Product, Cart
 
 import api
 
@@ -34,36 +35,76 @@ def routeAccountCreate():
 def routeAccountInfo():
 	return render_template("AccountInfo.html")
 
-@app.route('/database_test/add')
-def database_test_add():
-    o_name = request.args.get('name')
-    o_num = request.args.get('num')
-    o_bool = request.args.get('bool')
+@app.route('/database_test/add_user')
+def database_test_add_user():
+    username = request.args.get('username')
+    first_name = request.args.get('first_name')
+    last_name = request.args.get('last_name')
 
     try:
-        o_bool = bool(int(o_bool))
-    except:
-        o_bool = False
-
-    try:
-        o_num = float(o_num)
-    except:
-        o_num = 0
-
-    try:
-        obj = SampleObject(o_name, o_num, o_bool)
+        obj = User(username, first_name, last_name, 1, 1, datetime.datetime.utcnow())
         db.session.add(obj)
         db.session.commit()
 
-        return f"Object added. ID: {obj.o_id}"
+        return f"Object added. ID: {obj.user_id}"
+    except Exception as e:
+        return Response(utils.get_traceback(e), mimetype="text/plain")
+
+@app.route('/database_test/add_product')
+def database_test_add_product():
+    product_id = request.args.get('product_id')
+    name = request.args.get('name')
+    details = request.args.get('details')
+    image_url = request.args.get('image_url')
+    price = request.args.get('price')
+
+    try:
+        obj = Product(name, details, image_url, price)
+        db.session.add(obj)
+        db.session.commit()
+
+        return f"Object added. ID: {obj.product_id}"
+    except Exception as e:
+        return Response(utils.get_traceback(e), mimetype="text/plain")
+
+@app.route('/database_test/add_cart')
+def database_test_add_cart():
+    product_id = request.args.get('product_id')
+    user_id = request.args.get('user_id')
+    amount = request.args.get('amount')
+
+    try:
+        obj = Cart(product_id, user_id, 1)
+        db.session.add(obj)
+        db.session.commit()
+
+        return f"Object added. ID: {obj.user_id}"
+    except Exception as e:
+        return Response(utils.get_traceback(e), mimetype="text/plain")
+
+@app.route('/database_test/remove_product')
+def remove_product():
+    product_id = request.args.get('product_id')
+
+    try:
+        obj = Product.query.filter_by(product_id=product_id).one()
+        db.session.delete(obj)
+        db.session.commit()
+
+        return f"Object removed: ID = {product_id}"
     except Exception as e:
         return Response(utils.get_traceback(e), mimetype="text/plain")
 
 @app.route('/database_test')
 def database_test():
     try:
-        ret = SampleObject.query.all()
-        return Response(json.dumps([r.serialize() for r in ret]), mimetype="application/json")
+        retUser = User.query.all()
+        retProduct = Product.query.all()
+        retCart = Cart.query.all()
+
+        ret = json.dumps([[r.serialize() for r in i] for i in [retUser, retProduct, retCart]])
+
+        return Response(ret, mimetype="application/json")
     except Exception as e:
         return Response(utils.get_traceback(e), mimetype="text/plain")
 
