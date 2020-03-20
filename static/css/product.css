@@ -38,7 +38,7 @@ nav {
     align-content: space-between;
     display: flex;
     flex-direction: row;
-    background-color: #f1f1f1;
+   
     justify-content: space-evenly;
     align-items: baseline;
     height: 300px;
@@ -52,10 +52,9 @@ nav {
 .item > img {
     max-width: 45%;
     align-content: center;
-    border:cyan solid ;
+    border:lightgrey ;
     border-radius: 10%;
       
-   
 
 
     
