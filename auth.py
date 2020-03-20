@@ -129,3 +129,48 @@ def validate_token(token):
         return False
     
     return user.serialize()
+
+
+def set_user_admin_status(user_id, status):
+    user = User.query.filter_by(user_id=user_id)
+
+    if not user.count():
+        return False
+    
+    user = user.one()
+    user.is_admin = status
+
+    db.session.commit()
+    return True
+
+
+
+
+def token_precheck(func):
+    def wrapper(headers, **kwargs):
+        token = headers.get("Authorization")
+        if not token:
+            return api.error_401()
+        
+        user = validate_token(token)
+
+        if not user:
+            return api.error_401()
+        
+        result = func(user, **kwargs)
+
+        return result
+
+    return wrapper
+
+def admin_precheck(func):
+    def wrapper(user, **kwargs):
+
+        if not user["is_admin"]:
+            return api.error_403()
+        
+        result = func(user, **kwargs)
+
+        return result
+
+    return wrapper

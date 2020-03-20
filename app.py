@@ -4,18 +4,18 @@ import datetime
 from flask import Flask, Response, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 
-import utils
 from config import Config
 
 app = Flask(__name__)
-
 app.config.from_object(Config)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from models import User, Product, Cart
 
+import utils
 import api
+
 
 @app.route('/')
 @app.route('/home')
