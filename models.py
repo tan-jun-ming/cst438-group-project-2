@@ -3,12 +3,12 @@ from app import db
 class User(db.Model):
     __tablename__ = "user"
 
-    user_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True, index=True)
     username = db.Column(db.String())
     first_name = db.Column(db.String())
     last_name = db.Column(db.String())
-    password_hash = db.Column(db.Integer)
-    password_salt = db.Column(db.Integer)
+    password_hash = db.Column(db.LargeBinary())
+    password_salt = db.Column(db.LargeBinary())
     oldest_valid_timestamp = db.Column(db.TIMESTAMP())
 
     cart = db.relationship("Cart", cascade='all, delete-orphan', backref='user')

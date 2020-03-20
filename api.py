@@ -3,8 +3,19 @@ from app import app
 
 import accounts
 
-def error_401():
-    return "401 Unauthorized", 401
+def error_401(message=None):
+    ret = {"error": "401 Unauthorized"}
+    if message:
+        ret["message"] = message
+
+    return Response(json.loads(ret), status=401, mimetype="application/json")
+
+def error_403(message=None):
+    ret = {"error": "403 Forbidden"}
+    if message:
+        ret["message"] = message
+
+    return Response(json.loads(ret), status=403, mimetype="application/json")
 
 @app.route("/api/login", methods=["POST"])
 def login():
