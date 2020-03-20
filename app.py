@@ -115,3 +115,8 @@ def database_test():
 @app.route('/checkout')
 def checkout_page():
     return render_template("checkout.html")
+
+
+@app.route('/product')
+def product_page():
+    return render_template("Product.html")
