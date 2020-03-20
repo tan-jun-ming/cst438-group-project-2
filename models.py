@@ -10,6 +10,7 @@ class User(db.Model):
     password_hash = db.Column(db.LargeBinary())
     password_salt = db.Column(db.LargeBinary())
     oldest_valid_timestamp = db.Column(db.TIMESTAMP())
+    is_admin = db.Column(db.Boolean())
 
     cart = db.relationship("Cart", cascade='all, delete-orphan', backref='user')
 
@@ -20,6 +21,7 @@ class User(db.Model):
         self.password_hash = password_hash
         self.password_salt = password_salt
         self.oldest_valid_timestamp = oldest_valid_timestamp
+        self.is_admin = False
 
     def __repr__(self):
         return '<id {}>'.format(self.user_id)    
@@ -30,9 +32,8 @@ class User(db.Model):
             'username': self.username,
             'first_name': self.first_name,
             'last_name':self.last_name, 
-            'password_hash': self.password_hash,
-            'password_salt': self.password_salt,
-            'oldest_valid_timestamp': self.oldest_valid_timestamp.timestamp()
+            'oldest_valid_timestamp': self.oldest_valid_timestamp.timestamp(),
+            'is_admin': self.is_admin
         }
 
 class Product(db.Model):

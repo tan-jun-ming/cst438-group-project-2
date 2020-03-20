@@ -1,21 +1,24 @@
-from flask import request
+import json
+
+from flask import request, Response
 from app import app
 
-import accounts
+import auth
+import products
 
 def error_401(message=None):
     ret = {"error": "401 Unauthorized"}
     if message:
         ret["message"] = message
 
-    return Response(json.loads(ret), status=401, mimetype="application/json")
+    return Response(json.dumps(ret), status=401, mimetype="application/json")
 
 def error_403(message=None):
     ret = {"error": "403 Forbidden"}
     if message:
         ret["message"] = message
 
-    return Response(json.loads(ret), status=403, mimetype="application/json")
+    return Response(json.dumps(ret), status=403, mimetype="application/json")
 
 @app.route("/api/login", methods=["POST"])
 def login():
@@ -28,7 +31,7 @@ def login():
     if not username or not password:
         return error_401()
 
-    return accounts.login(username, password)
+    return auth.login(username, password)
 
 @app.route("/api/create_account", methods=["POST"])
 def create_account():
@@ -43,4 +46,12 @@ def create_account():
     if not username or not password or not firstname or not lastname:
         return error_401()
         
-    return accounts.create(username, password, firstname, lastname)
+    return auth.create(username, password, firstname, lastname)
+
+@app.route("/api/product/<int:product_id>/cart", methods=["POST", "PUT", "PATCH"])
+def add_to_cart(product_id):
+    return products.add_to_cart(request.headers, product_id=product_id, params=request.get_json(force=True, silent=True))
+
+@app.route("/api/product", methods=["POST"])
+def add_product():
+    return products.add_product(request.headers, params=request.get_json(force=True, silent=True))
