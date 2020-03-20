@@ -12,11 +12,29 @@ from models import User
 from config import Config
 
 def login(username, password):
-    valid = True
-    if not valid:
-        return api.error_401()
+    user = User.query.filter_by(username=username)
 
-    return f"Logged in as {username} (This line won't be here in prod)\n" + json.dumps({"token": "insert token here"})
+    if not user.count():
+        return api.error_403("This username does not exist.")
+    
+    user = user.one()
+
+    password_hash = hash_password(password.encode("utf-8"), user.password_salt)
+
+    if password_hash != user.password_hash:
+        return api.error_401("Invalid password.")
+
+    new_token = generate_token(user.user_id)
+
+    payload = json.dumps(
+        {
+            **user.serialize(),
+            **{"token": new_token}
+        }
+    )
+
+    return Response(payload, mimetype="application/json")
+
 
 def create(username, password, firstname, lastname):
     if not validate_password(password):
@@ -45,9 +63,9 @@ def create(username, password, firstname, lastname):
             "user_id": new_user.user_id,
             "username": username,
             "firstname": firstname,
-            "lastname": firstname
+            "lastname": lastname
         
-        }), mimetype="application/json"), 200
+        }), mimetype="application/json")
 
 def validate_password(password):
     return True
@@ -57,9 +75,57 @@ def hash_password(password, salt):
 
 def generate_salt(length=64):
     return bytes([random.randint(0, 255) for i in range(length)])
+    
 
 def generate_token(user_id, timestamp=None):
     if timestamp == None:
         timestamp = datetime.datetime.utcnow()
     
     secret = Config._jwt_secret
+    payload = {
+        "user_id": user_id,
+        "timestamp": timestamp.timestamp()
+        }
+
+    encoded_jwt = jwt.encode(payload, secret, algorithm='HS256')
+
+    return encoded_jwt.decode("utf-8")
+
+def invalidate_past_tokens(user_id, timestamp=None):
+    if timestamp == None:
+        timestamp = datetime.datetime.utcnow()
+
+    user = User.query.filter_by(user_id=user_id)
+
+    if not user.count():
+        raise ValueError("User ID does not exist.")
+
+    user.one().oldest_valid_timestamp = timestamp
+    db.session.commit()
+
+    return True
+
+def validate_token(token):
+    secret = Config._jwt_secret
+
+    try:
+        decoded_jwt = jwt.decode(token, secret, algorithms=['HS256'])
+    except jwt.exceptions.InvalidSignatureError:
+        return False
+    
+    user_id = decoded_jwt.get("user_id")
+    timestamp = decoded_jwt.get("timestamp")
+
+    if not user_id or not timestamp:
+        return False
+    
+    user = User.query.filter_by(user_id=user_id)
+
+    if not user.count():
+        return False
+    
+    user = user.one()
+    if timestamp < user.oldest_valid_timestamp.timestamp():
+        return False
+    
+    return user.serialize()
