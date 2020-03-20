@@ -1,0 +1,4 @@
+{
+    "DATABASE_URI": "postgres://username@localhost/dbname",
+    "JWT_SECRET": "insert_secret_here"
+}
