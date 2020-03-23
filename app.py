@@ -27,15 +27,15 @@ def home_page():
 def route_two():
     return 'Hello, this is another route!'
 	
-@app.route('/AccountCreate')
+@app.route('/create_account')
 def routeAccountCreate():
 	return render_template("AccountCreate.html")
 
-@app.route('/AccountInfo')
+@app.route('/account')
 def routeAccountInfo():
 	return render_template("AccountInfo.html")
 	
-@app.route('/AccountLogin')
+@app.route('/login')
 def routeAccountLogin():
 	return render_template("AccountLogin.html")
 

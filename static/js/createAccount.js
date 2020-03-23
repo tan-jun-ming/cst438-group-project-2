@@ -10,7 +10,7 @@ $(function(){
 		{
 			if (firstPass==secondPass){	
 				if (/[a-z]/.test(firstPass)&&/[A-Z]/.test(firstPass)&&/[0-9]/.test(firstPass)){
-					alert("Valid Password");
+					do_create_account(userName, firstPass, firstName, lastName);
 				}
 				else
 				{
@@ -26,5 +26,28 @@ $(function(){
 		{
 			alert("All Fields Must be Filled In");
 		}
-    })
+
+
+	})
+	
+
 })
+
+function do_create_account(username, password, firstname, lastname){
+	$.ajax({
+		method: "POST",
+		dataType: 'json',
+		url: "/api/create_account",
+    	contentType: 'application/json',
+    	data: JSON.stringify( {
+			"username": username,
+			"password": password,
+			"firstname": firstname,
+			"lastname": lastname
+		}),
+		success: function( data, status, jQxhr ){
+			alert("Account creation successful. Please log in to continue.");
+			window.location = "/login";
+		},
+	  })
+}

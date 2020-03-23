@@ -23,7 +23,7 @@
     <link href={{ url_for('static',filename='css/product.css')}} rel="stylesheet">
 
     <!-- Custom scripts for this template -->
-    <script src={{ url_for('static',filename='js/createAccount.js')}}></script>
+    <script src={{ url_for('static',filename='js/login.js')}}></script>
 </head>
 <body>
     <nav class="navbar sticky-top">
@@ -37,10 +37,11 @@
             <h1>Account Login</h1>
         </div>
 </div>
-<input type="text" id="UsernameInput" class="form-control" placeholder="Username">
-<input type="text" id="PasswordInput" class="form-control" placeholder="Password">
 <form class="m-3" id="CreateAccount">
-<button type="submit" class="btn btn-primary">Submit</button>
+    <input type="text" id="UsernameInput" class="form-control" placeholder="Username">
+    <input type="text" id="PasswordInput" class="form-control" placeholder="Password">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a href="/create_account">Create an Account</a>
 </form>
 </body>
 </html>
