@@ -23,23 +23,24 @@
     <link href={{ url_for('static',filename='css/product.css')}} rel="stylesheet">
 
     <!-- Custom scripts for this template -->
-    <script src={{ url_for('static',filename='js/index.js')}}></script>
+    <script src={{ url_for('static',filename='js/account_info.js')}}></script>
 </head>
 <body>
     <nav class="navbar sticky-top">
-        <button type="button" class="btn btn-outline-secondary">Temp Button</button>
+        <a type="button" class="btn btn-outline-secondary" href="/cart">Shopping Cart</button>
         <div class="ml-auto">
-            <button type="button" class="btn btn-outline-secondary">Temp Button</button>
+            <a type="button" class="btn btn-outline-secondary" href="/">Home</button>
         </div>
     </nav>
     <div class="d-flex flex-column align-items-center">
         <div class="d-flex flex-column align-items-center m-5">
             <h1>Account Info</h1>
         </div>
+        <ul class="list-group">
+          <li class="list-group-item">Name: <span id="name"></span></li>
+          <li class="list-group-item">Username: <span id="username"></span></li>
+        </ul>
+        <button type="button" class="btn btn-outline-danger" id="logout">Log Out</button>
   </div>
-<ul class="list-group">
-  <li class="list-group-item">Name: </li>
-  <li class="list-group-item">Username: </li>
-</ul>
 </body>
 </html>
