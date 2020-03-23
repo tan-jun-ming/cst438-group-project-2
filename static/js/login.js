@@ -30,10 +30,10 @@ function do_login(username, password){
 			"password": password,
 		}),
         success: function( data, status, jQxhr ){
-            localStorage.setItem(token, data.token);
-            localStorage.setItem(first_name, data.firstname);
-            localStorage.setItem(last_name, data.lastname);
-            localStorage.setItem(username, data.username);
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("first_name", data.firstname);
+            localStorage.setItem("last_name", data.lastname);
+            localStorage.setItem("username", data.username);
             window.location = "/";
         },
         error: function(jQxhr, status, error){
