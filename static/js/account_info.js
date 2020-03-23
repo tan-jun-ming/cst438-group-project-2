@@ -6,7 +6,7 @@ $(function(){
     })
     let user_token = localStorage.getItem("token");
 
-    if (user_token != null){
+    if (user_token == null){
         window.location = "/";
     } else {
         let firstname = localStorage.getItem("firstname");
