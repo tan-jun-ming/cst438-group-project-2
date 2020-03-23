@@ -31,8 +31,8 @@ function do_login(username, password){
 		}),
         success: function( data, status, jQxhr ){
             localStorage.setItem("token", data.token);
-            localStorage.setItem("first_name", data.firstname);
-            localStorage.setItem("last_name", data.lastname);
+            localStorage.setItem("firstname", data.first_name);
+            localStorage.setItem("lastname", data.last_name);
             localStorage.setItem("username", data.username);
             window.location = "/";
         },
