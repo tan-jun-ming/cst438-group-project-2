@@ -1,4 +1,5 @@
 from app import db
+from sqlalchemy.orm import backref
 
 class User(db.Model):
     __tablename__ = "user"
@@ -12,7 +13,7 @@ class User(db.Model):
     oldest_valid_timestamp = db.Column(db.TIMESTAMP())
     is_admin = db.Column(db.Boolean())
 
-    cart = db.relationship("Cart", cascade='all, delete-orphan', backref='user')
+    # cart = db.relationship("Cart", cascade='all, delete-orphan', backref='user')
 
     def __init__(self, username, first_name, last_name, password_hash, password_salt, oldest_valid_timestamp):
         self.username = username
@@ -45,7 +46,7 @@ class Product(db.Model):
     image_url = db.Column(db.String())
     price = db.Column(db.Float())
 
-    cart = db.relationship("Cart", cascade='all, delete-orphan', backref='product')
+    # cart = db.relationship("Cart", cascade='all, delete-orphan', backref='product')
 
     def __init__(self, name, details, image_url, price):
         self.name = name
@@ -72,6 +73,9 @@ class Cart(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.user_id"), primary_key=True)
     amount = db.Column(db.Integer)
 
+    product = db.relationship("Product", backref=backref("cart", cascade="all,delete"))
+    user = db.relationship("User", backref=backref("cart", cascade="all,delete"))
+
     def __init__(self, product_id, user_id, amount):
         self.product_id = product_id
         self.user_id = user_id
@@ -79,8 +83,7 @@ class Cart(db.Model):
 
     def serialize(self):
         return {
-            'product_id': self.product_id, 
-            'user_id': self.user_id,
+            'product': self.product.serialize(),
             'amount': self.amount
         }
 

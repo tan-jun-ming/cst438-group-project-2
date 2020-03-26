@@ -6,6 +6,13 @@ from app import app
 import auth
 import products
 
+def error_400(message=None):
+    ret = {"error": "400 Bad Request"}
+    if message:
+        ret["message"] = message
+
+    return Response(json.dumps(ret), status=400, mimetype="application/json")
+
 def error_401(message=None):
     ret = {"error": "401 Unauthorized"}
     if message:
@@ -47,6 +54,14 @@ def create_account():
         return error_401()
         
     return auth.create(username, password, firstname, lastname)
+
+@app.route("/api/cart")
+def get_cart():
+    return products.get_cart(request.headers)
+
+@app.route("/api/cart/checkout", methods=["PUT"])
+def checkout():
+    return products.checkout(request.headers)
 
 @app.route("/api/product/<int:product_id>/cart", methods=["POST", "PUT", "PATCH"])
 def add_to_cart(product_id):
