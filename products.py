@@ -10,7 +10,7 @@ from models import Product, Cart
 @auth.token_precheck
 def add_to_cart(user, product_id, params):
     if not params:
-        params= {}
+        params = {}
     amount = params.get("amount", 1)
     cart_item = Cart.query.filter_by(user_id=user["id"], product_id=product_id)
 
@@ -21,7 +21,7 @@ def add_to_cart(user, product_id, params):
     else:
         cart_item = cart_item.one()
         cart_item.amount = amount
-    
+
     try:
         db.session.commit()
     except sqlalchemy.exc.IntegrityError:
@@ -29,11 +29,12 @@ def add_to_cart(user, product_id, params):
 
     return cart_item.serialize()
 
+
 @auth.token_precheck
 def checkout(user):
     items = Cart.query.filter_by(user_id=user["id"])
     ret = json.dumps([i.serialize() for i in items.all()])
-    
+
     db.session.delete(items).first()
 
     return ret
@@ -46,21 +47,24 @@ def get_cart(user):
     return json.dumps([i.serialize() for i in items])
 
 
-def get_random_products():
+def get_random_products(amount=25):
     items = Product.query.order_by(sqlalchemy.func.random()).limit(25)
 
     return json.dumps([i.serialize() for i in items])
+
 
 # Please set `client_encoding = utf8`
 # in your postgresql.conf
 def add_products_from_json(fp):
     with open(fp, encoding="utf8") as o:
         data = json.loads(o.read())
-    
+
     for d in data.values():
-        new_product = Product(d.get("name"), d.get("desc"), d.get("img"), d.get("price"))
+        new_product = Product(
+            d.get("name"), d.get("desc"), d.get("img"), d.get("price")
+        )
         db.session.add(new_product)
-    
+
     db.session.commit()
 
 
@@ -69,7 +73,7 @@ def add_products_from_json(fp):
 def add_product(user, params):
     if not params:
         return api.error_400()
-    
+
     name = params.get("name")
     details = params.get("details")
     image_url = params.get("image_url")
@@ -77,14 +81,13 @@ def add_product(user, params):
 
     if not name or not price:
         return api.error_400()
-    
+
     try:
         new_product = Product(name, details, image_url, price)
         db.session.add(new_product)
         db.session.commit()
 
     except Exception as e:
-        return Response(utils.get_traceback(e),status=500, mimetype="text/plain")
-        
+        return Response(utils.get_traceback(e), status=500, mimetype="text/plain")
 
     return json.dumps(new_product.serialize())
