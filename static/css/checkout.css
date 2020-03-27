@@ -14,5 +14,7 @@ nav {
 
 .item-img {
   background-color: lightgrey;
-  width:70px; 
+  width:10em;
+  height:10em;
+  object-fit: contain; 
 }

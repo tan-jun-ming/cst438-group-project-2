@@ -31,6 +31,14 @@ def error_403(message=None):
     return Response(json.dumps(ret), status=403, mimetype="application/json")
 
 
+def success(message=None):
+    ret = {"success": True}
+    if message:
+        ret["message"] = message
+
+    return Response(json.dumps(ret), status=200, mimetype="application/json")
+
+
 @app.route("/api/login", methods=["POST"])
 def login():
     login_details = request.get_json(force=True, silent=True)
@@ -77,6 +85,13 @@ def add_to_cart(product_id):
         request.headers,
         product_id=product_id,
         params=request.get_json(force=True, silent=True),
+    )
+
+
+@app.route("/api/product/<int:product_id>/cart", methods=["DELETE"])
+def remove_from_cart(product_id):
+    return products.add_to_cart(
+        request.headers, product_id=product_id, params={"amount": 0},
     )
 
 

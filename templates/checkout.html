@@ -69,57 +69,8 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th scope="row" class="border-0">
-                    <div class="p-2">
-                      <img src={{ url_for('static',filename='img/image-placeholder.png')}} alt="video game"
-                        class="img-fluid rounded shadow-sm item-img">
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Video Game Title</a>
-                        </h5><span class="text-muted font-weight-normal font-italic d-block">More Info About Game
-                          Above</span>
-                      </div>
-                    </div>
-                  </th>
-                  <td class="border-0 align-middle"><strong>$59.00</strong></td>
-                  <td class="border-0 align-middle"><strong>1</strong></td>
-                  <td class="border-0 align-middle"><a href="#" class="text-dark"><i
-                        class="material-icons">delete</i></a></td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div class="p-2">
-                      <img src={{ url_for('static',filename='img/image-placeholder.png')}} alt="video game"
-                        class="img-fluid rounded shadow-sm item-img">
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Video Game Title</a>
-                        </h5><span class="text-muted font-weight-normal font-italic d-block">More Info About Game
-                          Above</span>
-                      </div>
-                    </div>
-                  </th>
-                  <td class="align-middle"><strong>$29.00</strong></td>
-                  <td class="align-middle"><strong>1</strong></td>
-                  <td class="align-middle"><a href="#" class="text-dark"><i class="material-icons">delete</i></a>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    <div class="p-2">
-                      <img src={{ url_for('static',filename='img/image-placeholder.png')}} alt="video game"
-                        class="img-fluid rounded shadow-sm item-img">
-                      <div class="ml-3 d-inline-block align-middle">
-                        <h5 class="mb-0"> <a href="#" class="text-dark d-inline-block align-middle">Video Game Title</a>
-                        </h5><span class="text-muted font-weight-normal font-italic d-block">More Info About Game
-                          Above</span>
-                      </div>
-                    </div>
-                  <td class="align-middle"><strong>$59.00</strong></td>
-                  <td class="align-middle"><strong>1</strong></td>
-                  <td class="align-middle"><a href="#" class="text-dark"><i class="material-icons">delete</i></a>
-                  </td>
-                </tr>
+              <tbody id="product_list">
+
               </tbody>
             </table>
           </div>
@@ -135,16 +86,20 @@
             <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.
             </p>
             <ul class="list-unstyled mb-4">
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal
-                </strong><strong>$149.97</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and
-                  handling</strong><strong>$0.00</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                  class="text-muted">Tax</strong><strong>$14.96</strong></li>
-              <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                <h5 class="font-weight-bold">$164.93</h5>
+              <li class="d-flex justify-content-between py-3 border-bottom font-weight-bold"><span
+                  class="text-muted">Order Subtotal
+                </span><span>$<span id="subtotal">0.00</span></span></li>
+              <li class="d-flex justify-content-between py-3 border-bottom font-weight-bold"><span
+                  class="text-muted">Shipping and
+                  handling</span><span>$<span id="shipping">0.00</span></span></li>
+              <li class="d-flex justify-content-between py-3 border-bottom font-weight-bold"><span
+                  class="text-muted">Tax</span><span>$<span id="taxes">0.00</span></span></li>
+              <li class="d-flex justify-content-between py-3 border-bottom font-weight-bold"><span
+                  class="text-muted">Total</span>
+                <h5 class="font-weight-bold"><span>$</span><span id="total">0.00</span></h5>
               </li>
-            </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+            </ul><button type="button" id="checkout-button" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to
+              checkout</a>
           </div>
         </div>
       </div> <!-- End of Order Summary -->

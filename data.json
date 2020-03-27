@@ -5956,5 +5956,17 @@
         "img": "https://steamcdn-a.akamaihd.net/steam/apps/999020/capsule_616x353.jpg",
         "name": "Mega Man Zero/ZX Legacy Collection",
         "price": 29.99
+    },
+	"1150690": {
+        "desc": "A surreal, exploration, horror RPG. Travel between new (old) worlds and uncover new (old) mysteries with your new (old) friends!",
+        "img": "https://steamcdn-a.akamaihd.net/steam/apps/1150690/capsule_616x353.jpg",
+        "name": "OMORI",
+        "price": 9.99
+    },
+	"34900": {
+        "desc": "Bad Rats is a physics puzzle game where rats finally get their bloody revenge on their new prisoners: The cats. Come up with creative solutions for each puzzle using physics, functional objects, and your specially trained Rats. Try different ways of solving each puzzle to finish faster or earn higher scores.",
+        "img": "https://steamcdn-a.akamaihd.net/steam/apps/34900/header.jpg",
+        "name": "Bad Rats: the Rats' Revenge",
+        "price": 0.99
     }
 }

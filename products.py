@@ -15,27 +15,48 @@ def add_to_cart(user, product_id, params):
     cart_item = Cart.query.filter_by(user_id=user["id"], product_id=product_id)
 
     if not cart_item.count():
+        if amount == 0:
+            return api.error_400("There is no product by that ID.")
+
         cart_item = Cart(product_id, user["id"], amount)
         db.session.add(cart_item)
 
     else:
         cart_item = cart_item.one()
-        cart_item.amount = amount
+
+        if amount > 0:
+            cart_item.amount = amount
+        else:
+            db.session.delete(cart_item)
 
     try:
         db.session.commit()
     except sqlalchemy.exc.IntegrityError:
         return api.error_400("There is no product by that ID.")
 
-    return cart_item.serialize()
+    return api.success()
 
 
 @auth.token_precheck
 def checkout(user):
-    items = Cart.query.filter_by(user_id=user["id"])
-    ret = json.dumps([i.serialize() for i in items.all()])
+    items = Cart.query.filter_by(user_id=user["id"]).all()
 
-    db.session.delete(items).first()
+    total_charged = 0
+    total_items = 0
+    for i in items:
+        total_charged += i.product.price * i.amount
+        total_items += i.amount
+        db.session.delete(i)
+
+    ret = json.dumps(
+        {
+            "total_charged": total_charged,
+            "total_items": total_items,
+            "purchased": [i.serialize() for i in items],
+        }
+    )
+
+    db.session.commit()
 
     return ret
 
