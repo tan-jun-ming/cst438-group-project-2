@@ -46,6 +46,24 @@ def get_cart(user):
     return json.dumps([i.serialize() for i in items])
 
 
+def get_random_products():
+    items = Product.query.order_by(sqlalchemy.func.random()).limit(25)
+
+    return json.dumps([i.serialize() for i in items])
+
+# Please set `client_encoding = utf8`
+# in your postgresql.conf
+def add_products_from_json(fp):
+    with open(fp, encoding="utf8") as o:
+        data = json.loads(o.read())
+    
+    for d in data.values():
+        new_product = Product(d.get("name"), d.get("desc"), d.get("img"), d.get("price"))
+        db.session.add(new_product)
+    
+    db.session.commit()
+
+
 @auth.token_precheck
 @auth.admin_precheck
 def add_product(user, params):
